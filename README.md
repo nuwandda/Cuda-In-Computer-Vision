@@ -1,2 +1,2 @@
 # Cuda In Computer Vision
- GPU-based implementation of some computer vision algorithms.
+ GPU-based implementations of some computer vision algorithms and their comparisons.
