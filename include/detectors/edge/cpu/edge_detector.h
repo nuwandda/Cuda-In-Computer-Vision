@@ -8,7 +8,9 @@
 
 class EdgeDetector {
 public:
-    static cv::Mat Detect(cv::Mat input_image, int threshold1, int threshold2, int aperture);
+    static cv::Mat CannyDetect(const cv::Mat &input_image, int threshold1, int threshold2, int aperture);
+
+    static cv::Mat SobelDetect(const cv::Mat &input_image, int ksize, int scale, int delta);
 };
 
 #endif //CUDA_IN_COMPUTER_VISION_EDGE_DETECTOR_H
