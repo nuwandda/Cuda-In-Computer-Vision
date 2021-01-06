@@ -9,7 +9,7 @@ set(NAME_SRC
 
 set(NAME_HEADERS
         include/filters/cpu/filters.h
-        include/detectors/edge/cpu/edge_detector.h)
+        include/detectors/edge/cpu/edge_detector.h include/convert/rgb_to_gray.h src/convert/cpu/rgb_to_gray.cpp)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
 link_directories(${CMAKE_BINARY_DIR}/bin)
