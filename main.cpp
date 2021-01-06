@@ -3,11 +3,12 @@
 #include <unistd.h>
 #include "filters/cpu/filters.h"
 #include "detectors/edge/cpu/edge_detector.h"
+#include "convert/rgb_to_gray.h"
 
 using namespace std;
 using namespace cv;
 
-string PATH = "/Users/nuwanda/Documents/Courses/Graduate/CENG 443 - Heterogeneous Parallel Programming/Final Project/Repo/Cuda-In-Computer-Vision/";
+string PATH = "";
 
 string GetExePath() {
     string cwd("\0", FILENAME_MAX + 1);
@@ -22,6 +23,7 @@ int main() {
 
     // Read input image with grayscale option
     Mat input_image = imread(PATH + "images/car.jpg", IMREAD_GRAYSCALE);
+    Mat input_image_bgr = imread(PATH + "images/car.jpg", IMREAD_COLOR);
     // Create output image
     Mat output_image;
 
@@ -33,4 +35,6 @@ int main() {
 
     output_image = EdgeDetector::SobelDetect(input_image, 1, 1, 0);
     imwrite(PATH + "images/sobel_lenna_draw.png", output_image);
+
+    RgbToGray::Convert(input_image_bgr);
 }

@@ -5,7 +5,7 @@
 using namespace std;
 using namespace cv;
 
-void Filters::ApplyFilters(cv::Mat input_image, cv::Mat output_image) {
+void Filters::ApplyFilters(const cv::Mat &input_image, cv::Mat output_image) {
     // Bilateral Filter
     clock_t start_s = clock();
     bilateralFilter(input_image, output_image, 9, 75, 75);
