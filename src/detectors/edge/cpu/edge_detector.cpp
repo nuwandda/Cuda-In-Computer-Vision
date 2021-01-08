@@ -24,16 +24,19 @@ Mat EdgeDetector::CannyDetect(const cv::Mat &input_image, int threshold1, int th
 cv::Mat EdgeDetector::SobelDetect(const cv::Mat &input_image, int ksize, int scale, int delta) {
     Mat src, src_gray, grad;
     int ddepth = CV_16S;
+
     // Remove noise by blurring with a Gaussian filter ( kernel size = 3 )
     GaussianBlur(input_image, src, Size(3, 3), 0, 0, BORDER_DEFAULT);
     // Convert the image to grayscale
     cvtColor(src, src_gray, COLOR_BGR2GRAY);
+
     Mat grad_x, grad_y;
     Mat abs_grad_x, abs_grad_y;
     clock_t start_s = clock();
     Sobel(src_gray, grad_x, ddepth, 1, 0, ksize, scale, delta, BORDER_DEFAULT);
     Sobel(src_gray, grad_y, ddepth, 0, 1, ksize, scale, delta, BORDER_DEFAULT);
-    // converting back to CV_8U
+
+    // Converting back to CV_8U
     convertScaleAbs(grad_x, abs_grad_x);
     convertScaleAbs(grad_y, abs_grad_y);
     addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, grad);
@@ -42,4 +45,24 @@ cv::Mat EdgeDetector::SobelDetect(const cv::Mat &input_image, int ksize, int sca
     cout << "\tTime for the CPU: " << (stop_s - start_s) / double(CLOCKS_PER_SEC) * 1000 << " ms" << endl;
 
     return grad;
+}
+
+cv::Mat EdgeDetector::LaplacianDetect(const cv::Mat &input_image, int ksize, int scale, int delta) {
+    Mat src, src_gray, dst;
+    int ddepth = CV_16S;
+
+    // Reduce noise by blurring with a Gaussian filter ( kernel size = 3 )
+    GaussianBlur(input_image, src, Size(3, 3), 0, 0, BORDER_DEFAULT);
+    cvtColor(src, src_gray, COLOR_BGR2GRAY); // Convert the image to grayscale
+
+    Mat abs_dst;
+    clock_t start_s = clock();
+    Laplacian(src_gray, dst, ddepth, ksize, scale, delta, BORDER_DEFAULT);
+    // Converting back to CV_8U
+    convertScaleAbs(dst, abs_dst);
+    clock_t stop_s = clock();
+    cout << "Laplacian Edge Detection:" << endl;
+    cout << "\tTime for the CPU: " << (stop_s - start_s) / double(CLOCKS_PER_SEC) * 1000 << " ms" << endl;
+
+    return abs_dst;
 }
