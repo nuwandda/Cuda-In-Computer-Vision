@@ -5,11 +5,14 @@ find_package(OpenCV REQUIRED)
 set(NAME_SRC
         main.cpp
         src/filters/cpu/filters.cpp
-        src/detectors/edge/cpu/edge_detector.cpp)
+        src/detectors/edge/cpu/edge_detector.cpp
+        src/convert/cpu/rgb_to_gray.cpp)
 
 set(NAME_HEADERS
         include/filters/cpu/filters.h
-        include/detectors/edge/cpu/edge_detector.h include/convert/rgb_to_gray.h src/convert/cpu/rgb_to_gray.cpp)
+        include/detectors/edge/cpu/edge_detector.h
+        include/convert/rgb_to_gray.h
+        include/Bitmap.h)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
 link_directories(${CMAKE_BINARY_DIR}/bin)
