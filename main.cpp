@@ -22,8 +22,8 @@ int main() {
     }
 
     // Read input image with grayscale option
-    Mat input_image = imread(PATH + "images/car.jpg", IMREAD_GRAYSCALE);
-    Mat input_image_bgr = imread(PATH + "images/car.jpg", IMREAD_COLOR);
+    Mat input_image = imread(PATH + "images/Lenna.png", IMREAD_GRAYSCALE);
+    Mat input_image_bgr = imread(PATH + "images/Lenna.png", IMREAD_COLOR);
     // Create output image
     Mat output_image;
 
@@ -35,6 +35,9 @@ int main() {
 
     output_image = EdgeDetector::SobelDetect(input_image, 1, 1, 0);
     imwrite(PATH + "images/sobel_lenna_draw.png", output_image);
+
+    output_image = EdgeDetector::LaplacianDetect(input_image, 3, 1, 0);
+    imwrite(PATH + "images/laplacian_lenna_draw.png", output_image);
 
     RgbToGray::Convert(input_image_bgr);
 }
