@@ -28,6 +28,7 @@
         "istream": "cpp",
         "ostream": "cpp",
         "array": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "queue": "cpp"
     }
 }
