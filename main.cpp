@@ -4,6 +4,7 @@
 #include "filters/cpu/filters.h"
 #include "detectors/edge/cpu/edge_detector.h"
 #include "convert/rgb_to_gray.h"
+#include "detectors/object/cpu/object_detector.h"
 
 using namespace std;
 using namespace cv;
@@ -40,4 +41,8 @@ int main() {
     imwrite(PATH + "images/laplacian_lenna_draw.png", output_image);
 
     RgbToGray::Convert(input_image_bgr);
+
+    input_image = imread(PATH + "images/red_ball.jpg", IMREAD_COLOR);
+    output_image = ObjectDetector::ColorBasedDetection(input_image, 159, 180);
+    imwrite(PATH + "images/detected_red.png", output_image);
 }
